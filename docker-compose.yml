@@ -11,3 +11,20 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    profiles:
+      - local
+
+  # HuggingFace Spaces profile - uses port 7860
+  hf-space:
+    build: .
+    ports:
+      - "7860:7860"
+    environment:
+      - NODE_ENV=production
+      - PORT=7860
+      - HOST=0.0.0.0
+    env_file:
+      - .env
+    restart: unless-stopped
+    profiles:
+      - hf

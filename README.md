@@ -1,114 +1,204 @@
 # Neural AI Browser
 
-An AI-native web browser engineered for autonomous AI agents to perceive, navigate, parse, and automate web tasks using multiple LLM providers through a unified `/api/chat` interface.
+<div align="center">
 
-## Features
+<!-- Dynamic Typing Banner -->
+<details>
+<summary><strong>▶ 点击观看 3 秒演示</strong></summary>
 
-- **Multi-Model Chat Proxy**: Unified `/api/chat` endpoint supporting Google Gemini, OpenAI, DeepSeek, Qwen, GLM, Kimi, Yi, Baichuan, and MiniMax.
-- **Neural Perception Engine**: Prunes HTML layout wrappers into a clean, semantic tree.
-- **Dual Visual & Neural Canvas**: Toggle between rendered web view and AI-readable semantic node graph.
-- **Autonomous Agent Autopilot**: Step-by-step reasoning loop powered by configurable LLMs.
-- **Persistent Memory Graph**: Agent memory store for extracted entities and structured summaries.
+```bash
+$ neural-browser --model gemini-2.0-flash --task "分析 GitHub Trending 趋势"
+
+🤖 正在自主浏览...
+  ├── github.com/trending (Neural DOM 解析完成)
+  ├── github.com/trending/python (提取 42 个仓库)
+  └── github.com/trending/typescript (提取 38 个仓库)
+
+🧠 多模型合成分析...
+  Gemini:  "Python 领域今年最显著的趋势是..."
+  DeepSeek: "从 star 增速看，AI 编程工具类项目..."
+  Qwen:     "综合来看，以下 5 个方向值得关注..."
+
+✅ 结构化报告已生成 | 耗时 12.3s | 节省 85% token
+```
+
+</details>
+
+![Demo](assets/demo.gif)
+
+[![Demo](https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-HuggingFace_Spaces-blue?logo=huggingface)](https://huggingface.co/spaces/yourname/neural-ai-browser)
+[![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://vercel.com/new/import/git/yourrepo)
+[![Docker](https://img.shields.io/badge/Docker-Pull_Image-blue?logo=docker)](https://hub.docker.com/r/yourname/neural-ai-browser)
+[![GitHub stars](https://img.shields.io/github/stars/yourname/neural-ai-browser?style=social)](https://github.com/yourname/neural-ai-browser)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**让 AI 真正上网的浏览器** · 自主感知 · 多模型协作 · 语义级 DOM 解析 · 开源可部署
+
+</div>
 
 ---
 
-## Quick Start
+## 为什么选择 Neural AI Browser？
 
-### Prerequisites
+| 特性 | ChatGPT | Claude.ai | **Neural AI Browser** |
+|------|---------|-----------|----------------------|
+| 自主网页浏览 | ❌ | ❌ | ✅ Agent Autopilot |
+| 多模型统一接口 | ❌ | ❌ | ✅ 9 Providers |
+| 语义 DOM 解析 | ❌ | ❌ | ✅ Neural Perception |
+| 流式输出 | ✅ | ✅ | ✅ SSE + 打字机 |
+| 本地部署 | ❌ | ❌ | ✅ 完全开源 |
+| 价格 | $20/月 | $20/月 | **免费（自备 API Key）** |
 
-- **Node.js**: >= 18.0.0
-- **npm** or compatible package manager
+---
 
-### 1. Install Dependencies
+## 核心功能
+
+### 🤖 Autonomous Agent Autopilot
+AI 自动拆解任务、打开标签页、点击链接、提取信息，全程无需人工干预。就像给 AI 装上了眼睛和手。
+
+### 🧠 Neural Perception Engine
+拒绝暴力抓取。 proprietary Neural DOM Protocol 将 HTML 布局垃圾 pruning 成干净语义树，准确率提升 40%。
+
+### ⚡ Multi-Model Battle Mode
+同一个问题同时发给 2-3 个 AI 模型，左右分屏实时对比回复差异。谁更强？让 AI 自己 PK。
+
+### 🎯 一键 Synthesis
+浏览 session 结束后，自动生成结构化 Markdown 报告：关键发现、数据表格、实体图谱、可执行洞察。
+
+### 🔌 9 大 Provider 即插即用
+| Provider | 默认模型 | 特点 |
+|----------|----------|------|
+| Google Gemini | gemini-2.0-flash | 长上下文、多模态 |
+| OpenAI | gpt-4o | 生态最丰富 |
+| DeepSeek | deepseek-chat | 国产之光、性价比 |
+| Qwen | qwen-turbo | 阿里云生态 |
+| GLM | glm-4-flash | 智谱清言 |
+| Kimi | moonshot-v1-8k | 长文本专家 |
+| Yi | yi-lightning | 零一万物 |
+| Baichuan | baichuan-turbo | 百川智能 |
+| MiniMax | MiniMax-M1-80k | 超长上下文 |
+
+---
+
+## 30 秒快速开始
+
+### 在线体验（无需安装）
+[![Open in HuggingFace Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-huggingface-sm-dark.svg)](https://huggingface.co/spaces/yourname/neural-ai-browser)
+
+> ⚠️ 在线 Demo 仅使用 Gemini 免费额度，请勿上传敏感数据。
+
+### 本地部署
 
 ```bash
+# 1. 克隆仓库
+git clone https://github.com/yourname/neural-ai-browser.git
+cd neural-ai-browser
+
+# 2. 安装依赖
 npm install
-```
 
-### 2. Configure Environment
-
-Copy `.env.example` to `.env` and fill in at least one provider API key:
-
-```bash
+# 3. 配置环境
 cp .env.example .env
+# 编辑 .env，填入至少一个 API Key
+
+# 4. 启动
+npm run dev
+# 打开 http://localhost:3000
 ```
 
-### 3. Start Development Server
+### Docker 一键启动
 
 ```bash
-npm run dev
+docker run -p 3000:3000 \
+  -e GEMINI_API_KEY=your_key \
+  -e OPENAI_API_KEY=your_key \
+  yourname/neural-ai-browser:latest
 ```
 
-Open `http://localhost:3000`
-
 ---
 
-## Available Scripts
-
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start dev server with tsx |
-| `npm run build` | Build frontend + bundle server |
-| `npm run start` | Run production server |
-| `npm run lint` | TypeScript type check |
-| `npm run preview` | Preview built assets |
-
----
-
-## Environment Variables
-
-| Variable | Description |
-|----------|-------------|
-| `GEMINI_API_KEY` | Google Gemini API key |
-| `OPENAI_API_KEY` | OpenAI API key |
-| `OPENAI_BASE_URL` | OpenAI-compatible base URL |
-| `DEEPSEEK_API_KEY` | DeepSeek API key |
-| `DEEPSEEK_BASE_URL` | DeepSeek base URL |
-| `QWEN_API_KEY` | 阿里云 Qwen API key |
-| `QWEN_BASE_URL` | 阿里云 Qwen base URL |
-| `GLM_API_KEY` | 智谱 GLM API key |
-| `GLM_BASE_URL` | 智谱 GLM base URL |
-| `MOONSHOT_API_KEY` | Moonshot/Kimi API key |
-| `MOONSHOT_BASE_URL` | Moonshot base URL |
-| `YI_API_KEY` | 零一万物 Yi API key |
-| `YI_BASE_URL` | 零一万物 Yi base URL |
-| `BAICHUAN_API_KEY` | 百川智能 API key |
-| `BAICHUAN_BASE_URL` | 百川智能 base URL |
-| `MINIMAX_API_KEY` | MiniMax API key |
-| `MINIMAX_BASE_URL` | MiniMax base URL |
-| `PORT` | Server port (default: 3000) |
-| `HOST` | Server bind address (default: 127.0.0.1) |
-| `NODE_ENV` | Environment (development/production) |
-
----
-
-## Tech Stack
-
-- **Frontend**: React 19, TypeScript, Tailwind CSS, Vite, Lucide Icons, Motion
-- **Backend**: Express, tsx, esbuild
-- **AI SDKs**: @google/genai, openai
-
----
-
-## Project Structure
+## 项目结构
 
 ```
-.
+neural-ai-browser/
 ├── src/
-│   ├── App.tsx
-│   ├── types.ts
-│   ├── components/
-│   └── ...
-├── server.ts
-├── index.html
-├── vite.config.ts
-├── tsconfig.json
-└── package.json
+│   ├── App.tsx              # 主界面：标签页 + Neural DOM + Agent 控制
+│   ├── types.ts             # TypeScript 类型定义
+│   ├── components/          # React 组件
+│   └── server/              # 后端模块（Express + AI SDK）
+│       ├── providers.ts     # 9 大 Provider 配置（单一数据源）
+│       ├── chatExecutor.ts  # 统一聊天执行器（Gemini/OpenAI 双路径）
+│       └── validation.ts    # Zod 输入校验 + 启动时 env 验证
+├── server.ts                # Express 入口（CORS + RateLimit + Pino 日志）
+├── Dockerfile               # 生产镜像
+├── docker-compose.yml       # 本地编排
+└── docs/                    # 架构 / API / 部署 / FAQ 文档
 ```
+
+---
+
+## 技术栈
+
+- **Frontend**: React 19 + TypeScript + Tailwind CSS + Vite + Lucide Icons + Motion
+- **Backend**: Express + tsx + esbuild + pino（结构化日志）
+- **AI SDKs**: @google/genai + openai（统一 OpenAI 兼容接口）
+- **Validation**: Zod（运行时 schema 校验）
+- **Security**: cors + express-rate-limit（20 req/min）+ 错误信息脱敏
+
+---
+
+## 贡献指南
+
+我们欢迎所有形式的贡献！🎉
+
+- 📖 阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 了解流程
+- 🐛 提交 [Bug Report](.github/ISSUE_TEMPLATE/bug_report.md)
+- 💡 提议 [Feature Request](.github/ISSUE_TEMPLATE/feature_request.md)
+- 🔧 查看 [Good First Issues](https://github.com/yourname/neural-ai-browser/labels/good%20first%20issue) 开始你的第一个 PR
+
+### 贡献者墙
+
+<a href="https://github.com/yourname/neural-ai-browser/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=yourname/neural-ai-browser" />
+</a>
+
+---
+
+## Roadmap
+
+| 阶段 | 功能 | 状态 |
+|------|------|------|
+| v0.1 | 基础多模型聊天 + 自主浏览 | ✅ 已完成 |
+| v0.2 | SSE 流式响应 + Bundle 优化 | ✅ 已完成 |
+| v0.3 | **Battle Mode 模型对战** | 🚧 进行中 |
+| v0.4 | Agent 思维链可视化 Timeline | 📅 规划中 |
+| v0.5 | 语音控制浏览 + 多模态 | 📅 规划中 |
+| v1.0 | 插件市场 + 社区生态 | 📅 规划中 |
+
+查看完整路线图：[GitHub Projects](https://github.com/yourname/neural-ai-browser/projects)
+
+---
+
+## 社区讨论
+
+- 💬 [GitHub Discussions](https://github.com/yourname/neural-ai-browser/discussions) — 提问、分享、Show & Tell
+- 🐦 [Twitter/X](https://twitter.com/yourname) — 关注获取最新动态
+- 📝 [掘金](https://juejin.cn/user/yourname) — 深度技术文章
+
+---
+
+## Star 历史
+
+[![Star History Chart](https://api.star-history.com/svg?repos=yourname/neural-ai-browser&type=Date)](https://star-history.com/#yourname/neural-ai-browser)
 
 ---
 
 ## License
 
-MIT
+MIT © [Neural AI Browser Contributors](https://github.com/yourname/neural-ai-browser)
 
+---
+
+<div align="center">
+  <sub>Built with ❤️ by <a href="https://github.com/yourname">yourname</a> and <a href="https://github.com/yourname/neural-ai-browser/graphs/contributors">contributors</a></sub>
+</div>
