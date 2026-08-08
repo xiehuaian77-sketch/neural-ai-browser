@@ -1,0 +1,6 @@
+{
+  "name": "AI Browser",
+  "description": "An AI-native browser engineered for AI agents to perceive, navigate, parse, and automate web tasks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
