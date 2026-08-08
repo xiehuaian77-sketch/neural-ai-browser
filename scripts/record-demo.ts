@@ -180,7 +180,7 @@ async function convertWebmToGif(input: string, output: string) {
       output,
     ]);
 
-    ffmpeg.stderr.on("data", (data) => {
+    ffmpeg.stderr.on("data", (_data) => {
       // ffmpeg logs to stderr
     });
 
