@@ -76,3 +76,17 @@ export const SynthesizeRequestSchema = z.object({
 });
 
 export type SynthesizeRequest = z.infer<typeof SynthesizeRequestSchema>;
+
+export const BattleRequestSchema = z.object({
+  question: z.string().min(1).max(10000),
+  sideA: z.object({
+    provider: z.string().min(1).max(50),
+    model: z.string().min(1).max(100).optional(),
+  }),
+  sideB: z.object({
+    provider: z.string().min(1).max(50),
+    model: z.string().min(1).max(100).optional(),
+  }),
+});
+
+export type BattleRequest = z.infer<typeof BattleRequestSchema>;

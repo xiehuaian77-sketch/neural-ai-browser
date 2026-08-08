@@ -10,7 +10,7 @@ export interface ProviderInfo {
   models: ModelInfo[];
 }
 
-export type ViewMode = 'visual' | 'neural' | 'split';
+export type ViewMode = 'visual' | 'neural' | 'split' | 'battle';
 
 export type AgentStatus = 'idle' | 'analyzing' | 'navigating' | 'extracting' | 'executing' | 'synthesizing' | 'completed' | 'error';
 
@@ -104,4 +104,44 @@ export interface SwarmTask {
   assignedAgentName: string;
   progress: number;
   resultSummary?: string;
+}
+
+// ==============================
+// Battle Mode Types
+// ==============================
+
+export interface BattleSide {
+  provider: string;
+  model: string;
+  providerName: string;
+  modelName: string;
+  text: string;
+  latencyMs: number;
+  error?: string;
+}
+
+export interface BattleResponse {
+  success: boolean;
+  question: string;
+  sideA: BattleSide;
+  sideB: BattleSide;
+  winner?: 'A' | 'B' | 'tie';
+  totalLatencyMs: number;
+}
+
+export interface BattleRequest {
+  question: string;
+  sideA: {
+    provider: string;
+    model?: string;
+  };
+  sideB: {
+    provider: string;
+    model?: string;
+  };
+}
+
+export interface BattleVote {
+  side: 'A' | 'B' | 'tie';
+  timestamp: string;
 }

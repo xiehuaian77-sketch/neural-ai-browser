@@ -10,11 +10,13 @@ import pino from "pino";
 
 import { PROVIDER_DEFS, getAllProvidersForUI } from "./src/server/providers";
 import { executeChat, executeChatStream, ExecuteChatOptions } from "./src/server/chatExecutor";
+import { executeBattle } from "./src/server/battleExecutor";
 import {
   ChatRequestSchema,
   ParsePageRequestSchema,
   AgentStepRequestSchema,
   SynthesizeRequestSchema,
+  BattleRequestSchema,
   validateEnv,
 } from "./src/server/validation";
 
@@ -122,6 +124,36 @@ app.post("/api/chat/stream", chatLimiter, async (req, res) => {
     logger.error({ err: error, provider: body.provider, model: body.model, route: "/api/chat/stream" }, "stream chat failed");
     res.write(`data: ${JSON.stringify({ error: error?.message || "Stream failed." })}\n\n`);
     res.end();
+  }
+});
+
+// ==============================
+// Battle Mode Endpoint
+// ==============================
+
+app.post("/api/battle", chatLimiter, async (req, res) => {
+  const parseResult = BattleRequestSchema.safeParse(req.body);
+  if (!parseResult.success) {
+    return res.status(400).json({
+      success: false,
+      error: `Invalid request: ${parseResult.error.issues.map((i) => i.message).join(", ")}`,
+    });
+  }
+
+  const body = parseResult.data;
+
+  try {
+    const result = await executeBattle(body.question, 
+      { provider: body.sideA.provider, model: body.sideA.model || '' },
+      { provider: body.sideB.provider, model: body.sideB.model || '' }
+    );
+    res.json(result);
+  } catch (error: any) {
+    logger.error({ err: error, route: "/api/battle" }, "battle failed");
+    res.status(500).json({
+      success: false,
+      error: error?.message || "Battle request failed.",
+    });
   }
 });
 

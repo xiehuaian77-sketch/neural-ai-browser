@@ -18,6 +18,7 @@ import { AgentPanel } from './components/AgentPanel';
 import { MemoryModal } from './components/MemoryModal';
 import { SwarmModal } from './components/SwarmModal';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { BattleMode } from './components/BattleMode';
 
 const STORAGE_KEY = 'ai-browser-memory-items';
 
@@ -42,8 +43,11 @@ export default function App() {
         if (data.providers && data.providers.length > 0) {
           setProviders(data.providers);
           const first = data.providers[0];
+          const second = data.providers[1] || data.providers[0];
           setSelectedProvider(first.id);
           setSelectedModel(first.defaultModel);
+          setBattleSideA({ provider: first.id, model: first.defaultModel });
+          setBattleSideB({ provider: second.id, model: second.defaultModel });
         }
       })
       .catch(() => {});
@@ -52,6 +56,17 @@ export default function App() {
   // Modals state
   const [isMemoryOpen, setIsMemoryOpen] = useState(false);
   const [isSwarmOpen, setIsSwarmOpen] = useState(false);
+
+  // Battle Mode state
+  const [battleQuestion, setBattleQuestion] = useState('');
+  const [battleSideA, setBattleSideA] = useState<{ provider: string; model: string }>({
+    provider: '',
+    model: '',
+  });
+  const [battleSideB, setBattleSideB] = useState<{ provider: string; model: string }>({
+    provider: '',
+    model: '',
+  });
 
   // Memory: load from localStorage
   const [memoryItems, setMemoryItems] = useState<KnowledgeItem[]>(() => {
@@ -573,6 +588,21 @@ Return JSON:
                 onNodeAction={handleNodeAction}
                 hoveredNodeId={hoveredNodeId}
                 setHoveredNodeId={setHoveredNodeId}
+              />
+            </div>
+          )}
+
+          {/* BATTLE MODE */}
+          {viewMode === 'battle' && (
+            <div className="w-full h-full">
+              <BattleMode
+                question={battleQuestion}
+                onQuestionChange={setBattleQuestion}
+                sideA={battleSideA}
+                sideB={battleSideB}
+                onSideAChange={setBattleSideA}
+                onSideBChange={setBattleSideB}
+                providers={providers}
               />
             </div>
           )}

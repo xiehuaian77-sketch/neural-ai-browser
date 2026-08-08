@@ -17,6 +17,7 @@ import {
   ShieldCheck,
   Download,
   ChevronDown,
+  Swords,
 } from 'lucide-react';
 
 interface HeaderNavbarProps {
@@ -304,6 +305,19 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
           >
             <Code2 className="w-3.5 h-3.5 text-indigo-300" />
             <span className="hidden sm:inline">Neural</span>
+          </button>
+
+          <button
+            onClick={() => setViewMode('battle')}
+            className={`flex items-center space-x-1.5 px-2.5 py-1 rounded text-xs transition ${
+              viewMode === 'battle'
+                ? 'bg-amber-600 text-white font-medium shadow'
+                : 'text-slate-400 hover:text-amber-300'
+            }`}
+            title="Battle Mode: Compare Two Models Side-by-Side"
+          >
+            <Swords className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden sm:inline">Battle</span>
           </button>
         </div>
       </div>
