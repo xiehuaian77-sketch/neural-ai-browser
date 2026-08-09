@@ -27,14 +27,16 @@ $ neural-browser --model gemini-2.0-flash --task "分析 GitHub Trending 趋势"
 ![Demo](assets/demo.gif)
 
 [![Demo](https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-HuggingFace_Spaces-blue?logo=huggingface)](https://huggingface.co/spaces/yourname/neural-ai-browser)
-[![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://vercel.com/new/import/git/yourrepo)
-[![Docker](https://img.shields.io/badge/Docker-Pull_Image-blue?logo=docker)](https://hub.docker.com/r/yourname/neural-ai-browser)
+[![Deploy to Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://vercel.com/new/import/git/yourname/neural-ai-browser)
+[![Docker Image](https://img.shields.io/badge/Docker-Pull_Image-blue?logo=docker)](https://hub.docker.com/r/yourname/neural-ai-browser)
 [![GitHub stars](https://img.shields.io/github/stars/yourname/neural-ai-browser?style=social)](https://github.com/yourname/neural-ai-browser)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 **让 AI 真正上网的浏览器** · 自主感知 · 多模型协作 · 语义级 DOM 解析 · 开源可部署
 
 </div>
+
+> 🚀 **部署到 HuggingFace Spaces / Vercel 仅需 5 分钟** → 查看 [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ---
 
