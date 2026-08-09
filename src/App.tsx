@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { X, BrainCircuit, Upload } from 'lucide-react';
 import {
   BrowserTab,
   DOMNode,
@@ -20,6 +21,7 @@ import { SwarmModal } from './components/SwarmModal';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { BattleMode } from './components/BattleMode';
 import { ChainOfThoughtVisualizer } from './components/ChainOfThoughtVisualizer';
+import { FileUpload, UploadedFile } from './components/FileUpload';
 
 const STORAGE_KEY = 'ai-browser-memory-items';
 
@@ -30,6 +32,7 @@ export default function App() {
   const [urlInput, setUrlInput] = useState<string>('https://arxiv.org/abs/2608.01234');
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
   const [activeAgentTargetId, setActiveAgentTargetId] = useState<string | null>(null);
+  const [isUploadPanelOpen, setIsUploadPanelOpen] = useState(false);
 
   // Model / Provider state
   const [providers, setProviders] = useState<ProviderInfo[]>([]);
@@ -101,6 +104,12 @@ export default function App() {
 
   const [swarmTasks, setSwarmTasks] = useState<SwarmTask[]>([]);
   const [synthesizedReport, setSynthesizedReport] = useState<string | null>(null);
+  const [parsedFiles, setParsedFiles] = useState<UploadedFile[]>([]);
+  const [isAgentPanelOpen, setIsAgentPanelOpen] = useState(false);
+
+  const handleFilesParsed = (files: UploadedFile[]) => {
+    setParsedFiles((prev) => [...prev, ...files]);
+  };
 
   const activeTab = tabs.find((t) => t.id === activeTabId) || tabs[0];
   const safePageData: WebPageData = activeTab.pageData || {
@@ -547,8 +556,39 @@ Return JSON:
 
       {/* Main Workspace Body */}
       <div className="flex-1 flex overflow-hidden relative">
+        {/* File Upload Sidebar */}
+        {isUploadPanelOpen && (
+          <div className="w-80 md:w-96 bg-slate-900 border-r border-slate-800 flex flex-col h-full overflow-y-auto">
+            <div className="p-3.5 border-b border-slate-800 bg-slate-950 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Upload className="w-4 h-4 text-sky-400" />
+                <span className="font-bold text-sm text-slate-100">文件解析</span>
+              </div>
+              <button
+                onClick={() => setIsUploadPanelOpen(false)}
+                className="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-white transition"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="p-4">
+              <FileUpload onFilesParsed={handleFilesParsed} />
+            </div>
+          </div>
+        )}
+
         {/* Left/Main Canvas Area */}
         <div className="flex-1 flex overflow-hidden relative">
+          {/* Mobile upload toggle FAB */}
+          <button
+            onClick={() => setIsUploadPanelOpen((v) => !v)}
+            className={`md:hidden absolute bottom-4 left-4 z-20 p-3 rounded-full shadow-lg border transition ${
+              isUploadPanelOpen ? 'bg-slate-800 border-slate-600 text-white' : 'bg-sky-600 border-sky-500 text-white'
+            }`}
+            title="Toggle file upload"
+          >
+            <Upload className="w-5 h-5" />
+          </button>
           {/* VISUAL MODE */}
           {viewMode === 'visual' && (
             <div className="w-full h-full">
@@ -613,24 +653,47 @@ Return JSON:
             <div className="w-full h-full bg-slate-950">
               <ChainOfThoughtVisualizer
                 steps={activeTabForRender.steps || []}
-                isRunning={agentStatus === 'analyzing' || agentStatus === 'executing'}
+                isRunning={(activeTabForRender.agentStatus || 'idle') === 'analyzing' || (activeTabForRender.agentStatus || 'idle') === 'executing'}
               />
             </div>
           )}
         </div>
 
         {/* Right Side Agent Controller Drawer */}
-        <AgentPanel
-          agentTask={activeTabForRender.agentTask || ''}
-          setAgentTask={(task) => updateActiveTab((t) => ({ ...t, agentTask: task }))}
-          agentStatus={activeTabForRender.agentStatus || 'idle'}
-          steps={activeTabForRender.steps || []}
-          onRunAutoLoop={handleRunAutoLoop}
-          onStepNext={() => handleStepNext()}
-          onResetAgent={handleResetAgent}
-          onSynthesize={handleSynthesize}
-          synthesizedReport={synthesizedReport}
-        />
+        <button
+          onClick={() => setIsAgentPanelOpen((v) => !v)}
+          className="md:hidden absolute bottom-4 right-4 z-20 p-3 rounded-full shadow-lg border bg-sky-600 border-sky-500 text-white"
+          title="Toggle agent panel"
+        >
+          <BrainCircuit className="w-5 h-5" />
+        </button>
+
+        {/* Agent Panel - always visible on desktop, toggleable overlay on mobile */}
+        <div className={`${isAgentPanelOpen ? 'fixed inset-0 z-30' : 'hidden'} md:relative md:block md:z-auto`}>
+          <div className="md:relative absolute inset-0 md:inset-auto">
+            {isAgentPanelOpen && (
+              <button
+                onClick={() => setIsAgentPanelOpen(false)}
+                className="md:hidden absolute top-2 right-2 z-40 p-1.5 rounded bg-slate-800 border border-slate-700 text-slate-300"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+            <div className={`md:block ${isAgentPanelOpen ? 'block' : 'hidden'} md:w-auto`} style={{ width: '320px' }}>
+              <AgentPanel
+                agentTask={activeTabForRender.agentTask || ''}
+                setAgentTask={(task) => updateActiveTab((t) => ({ ...t, agentTask: task }))}
+                agentStatus={activeTabForRender.agentStatus || 'idle'}
+                steps={activeTabForRender.steps || []}
+                onRunAutoLoop={handleRunAutoLoop}
+                onStepNext={() => handleStepNext()}
+                onResetAgent={handleResetAgent}
+                onSynthesize={handleSynthesize}
+                synthesizedReport={synthesizedReport}
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Modals */}

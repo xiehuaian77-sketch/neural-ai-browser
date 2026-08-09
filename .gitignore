@@ -24,3 +24,6 @@ server.cjs
 bun.lock
 
 .vercel
+
+# Temp / scratch
+tmp/

@@ -7,16 +7,19 @@ import dotenv from "dotenv";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import pino from "pino";
+import multer from "multer";
 
 import { PROVIDER_DEFS, getAllProvidersForUI } from "./src/server/providers";
 import { executeChat, executeChatStream, ExecuteChatOptions } from "./src/server/chatExecutor";
 import { executeBattle } from "./src/server/battleExecutor";
+import { parseFile } from "./src/server/fileParser";
 import {
   ChatRequestSchema,
   ParsePageRequestSchema,
   AgentStepRequestSchema,
   SynthesizeRequestSchema,
   BattleRequestSchema,
+  FileUploadRequestSchema,
   validateEnv,
 } from "./src/server/validation";
 
@@ -44,6 +47,38 @@ const chatLimiter = rateLimit({
   message: { success: false, error: "Too many requests. Please slow down." },
   standardHeaders: true,
   legacyHeaders: false,
+});
+
+// ==============================
+// File Upload Configuration
+// ==============================
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB limit
+    files: 5,
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = [
+      "application/pdf",
+      "text/plain",
+      "text/csv",
+      "application/csv",
+      "image/png",
+      "image/jpeg",
+      "image/jpg",
+      "image/webp",
+      "image/gif",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/msword",
+    ];
+    if (allowedTypes.includes(file.mimetype) || file.mimetype.startsWith("text/")) {
+      cb(null, true);
+    } else {
+      cb(new Error(`Unsupported file type: ${file.mimetype}`));
+    }
+  },
 });
 
 // ==============================
@@ -154,6 +189,50 @@ app.post("/api/battle", chatLimiter, async (req, res) => {
       success: false,
       error: error?.message || "Battle request failed.",
     });
+  }
+});
+
+// ==============================
+// File Upload & Parsing Endpoints
+// ==============================
+
+app.post("/api/upload", upload.array("files", 5), async (req, res) => {
+  try {
+    if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
+      return res.status(400).json({ success: false, error: "No files uploaded" });
+    }
+
+    const files = req.files as Express.Multer.File[];
+    const parsedFiles = await Promise.all(
+      files.map(async (file) => {
+        const parsed = await parseFile(file);
+        return {
+          originalName: file.originalname,
+          mimetype: file.mimetype,
+          size: file.size,
+          ...parsed,
+        };
+      })
+    );
+
+    res.json({ success: true, files: parsedFiles });
+  } catch (error: any) {
+    logger.error({ err: error, route: "/api/upload" }, "upload failed");
+    res.status(500).json({ success: false, error: error?.message || "Upload failed." });
+  }
+});
+
+app.post("/api/parse-file", upload.single("file"), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ success: false, error: "No file uploaded" });
+    }
+
+    const parsed = await parseFile(req.file);
+    res.json({ success: true, ...parsed });
+  } catch (error: any) {
+    logger.error({ err: error, route: "/api/parse-file" }, "parse-file failed");
+    res.status(500).json({ success: false, error: error?.message || "File parsing failed." });
   }
 });
 

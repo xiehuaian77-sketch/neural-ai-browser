@@ -1,15 +1,15 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 // ==============================
 // Environment Validation
 // ==============================
 
 const EnvSchema = z.object({
-  NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
+  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.coerce.number().int().positive().default(3000),
-  HOST: z.string().default("127.0.0.1"),
-  LOG_LEVEL: z.enum(["trace", "debug", "info", "warn", "error", "fatal"]).default("info"),
-  CORS_ORIGIN: z.string().default("*"),
+  HOST: z.string().default('127.0.0.1'),
+  LOG_LEVEL: z.enum(['trace', 'debug', 'info', 'warn', 'error', 'fatal']).default('info'),
+  CORS_ORIGIN: z.string().default('*'),
 });
 
 export type Env = z.infer<typeof EnvSchema>;
@@ -17,9 +17,9 @@ export type Env = z.infer<typeof EnvSchema>;
 export function validateEnv(): Env {
   const result = EnvSchema.safeParse(process.env);
   if (!result.success) {
-    console.error("❌ Invalid environment variables:");
-    console.error(result.error.issues.map((i) => `  - ${i.path.join(".")}: ${i.message}`).join("\n"));
-    console.error("\nPlease check your .env file against .env.example");
+    console.error('Invalid environment variables:');
+    console.error(result.error.issues.map((i) => '  - ' + i.path.join('.') + ': ' + i.message).join(String.fromCharCode(10)));
+    console.error('Please check your .env file against .env.example');
     process.exit(1);
   }
   return result.data;
@@ -34,7 +34,7 @@ export const ChatRequestSchema = z.object({
   model: z.string().min(1).max(100).optional(),
   messages: z.array(
     z.object({
-      role: z.enum(["user", "assistant", "system"]),
+      role: z.enum(['user', 'assistant', 'system']),
       content: z.string().max(100000),
     })
   ).min(1).max(100),
@@ -90,3 +90,11 @@ export const BattleRequestSchema = z.object({
 });
 
 export type BattleRequest = z.infer<typeof BattleRequestSchema>;
+
+export const FileUploadRequestSchema = z.object({
+  provider: z.string().min(1).max(50).optional(),
+  model: z.string().min(1).max(100).optional(),
+  question: z.string().max(10000).optional(),
+});
+
+export type FileUploadRequest = z.infer<typeof FileUploadRequestSchema>;
