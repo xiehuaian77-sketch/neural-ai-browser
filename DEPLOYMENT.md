@@ -42,7 +42,7 @@ hf repo create neural-ai-browser --type space --space_sdk docker
 
 ### Step 4: Configure Space Settings
 
-1. Go to https://huggingface.co/spaces/your-org/neural-ai-browser/settings
+1. Go to https://huggingface.co/spaces/xiehuaian77-sketch/neural-ai-browser/settings
 2. Under **"Docker image"**, ensure `Dockerfile` is selected
 3. Under **"Secrets and variables"**, add the following secrets:
    - `GEMINI_API_KEY` (optional, for Gemini)
@@ -58,7 +58,7 @@ hf repo create neural-ai-browser --type space --space_sdk docker
 cd D:/31986/Documents/ai-browser
 
 # Add HF Space as a remote
-git remote add hf https://huggingface.co/spaces/your-org/neural-ai-browser
+git remote add hf https://huggingface.co/spaces/xiehuaian77-sketch/neural-ai-browser
 
 # Push the main branch to HF Space
 git subtree push --prefix . hf main
@@ -66,7 +66,7 @@ git subtree push --prefix . hf main
 
 ### Step 6: Verify Deployment
 
-1. Open https://huggingface.co/spaces/your-org/neural-ai-browser
+1. Open https://huggingface.co/spaces/xiehuaian77-sketch/neural-ai-browser
 2. Click **"App"** tab to see the running app
 3. The health check endpoint is `/api/health`
 4. Default port is `7860` (HF Spaces will proxy it)
@@ -113,7 +113,7 @@ vercel --prod
 
 ### Step 3: Configure Environment Variables
 
-1. Go to https://vercel.com/your-org/neural-ai-browser/settings/environment-variables
+1. Go to https://vercel.com/xiehuaian77-sketch/neural-ai-browser/settings/environment-variables
 2. Add the following variables (same as HF Spaces):
    - `GEMINI_API_KEY`
    - `OPENAI_API_KEY`
@@ -162,10 +162,10 @@ docker push yourname/neural-ai-browser:latest
 ## Post-Deployment Checklist
 
 - [ ] Update `README.md` with actual deployment URLs:
-  - `https://huggingface.co/spaces/your-org/neural-ai-browser`
-  - `https://neural-ai-browser.vercel.app`
+  - `https://huggingface.co/spaces/xiehuaian77-sketch/neural-ai-browser`
+  - `https://neural-ai-browser.vercel.app` (or your Vercel domain)
 - [ ] Update `package.json` with actual repository URL:
-  - `"repository.url": "https://github.com/your-org/neural-ai-browser"`
+  - `"repository.url": "https://github.com/xiehuaian77-sketch/neural-ai-browser"`
 - [ ] Update `.env` with production API keys (do NOT commit `.env`)
 - [ ] Test the deployed app:
   - [ ] Homepage loads
@@ -204,5 +204,5 @@ docker push yourname/neural-ai-browser:latest
 
 ## Need Help?
 
-- Open a [GitHub Issue](https://github.com/your-org/neural-ai-browser/issues)
-- Join [GitHub Discussions](https://github.com/your-org/neural-ai-browser/discussions)
+- Open a [GitHub Issue](https://github.com/xiehuaian77-sketch/neural-ai-browser/issues)
+- Join [GitHub Discussions](https://github.com/xiehuaian77-sketch/neural-ai-browser/discussions)
