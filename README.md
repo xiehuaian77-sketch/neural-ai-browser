@@ -37,6 +37,8 @@ $ neural-browser --model gemini-2.0-flash --task "分析 GitHub Trending 趋势"
 </div>
 
 > 🚀 **部署到 HuggingFace Spaces / Vercel 仅需 5 分钟** → 查看 [DEPLOYMENT.md](DEPLOYMENT.md)
+>
+> ⚠️ **HF Space 状态**：代码已就绪，Space 尚未创建。请按照 [DEPLOYMENT.md](DEPLOYMENT.md) 手动创建，或提供有效的 HF Token 自动创建。
 
 ---
 
