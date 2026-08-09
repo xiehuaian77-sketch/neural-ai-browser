@@ -19,6 +19,7 @@ import { MemoryModal } from './components/MemoryModal';
 import { SwarmModal } from './components/SwarmModal';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { BattleMode } from './components/BattleMode';
+import { ChainOfThoughtVisualizer } from './components/ChainOfThoughtVisualizer';
 
 const STORAGE_KEY = 'ai-browser-memory-items';
 
@@ -603,6 +604,16 @@ Return JSON:
                 onSideAChange={setBattleSideA}
                 onSideBChange={setBattleSideB}
                 providers={providers}
+              />
+            </div>
+          )}
+
+          {/* CHAIN OF THOUGHT MODE */}
+          {viewMode === 'chain' && (
+            <div className="w-full h-full bg-slate-950">
+              <ChainOfThoughtVisualizer
+                steps={activeTabForRender.steps || []}
+                isRunning={agentStatus === 'analyzing' || agentStatus === 'executing'}
               />
             </div>
           )}

@@ -18,6 +18,7 @@ import {
   Download,
   ChevronDown,
   Swords,
+  BrainCircuit,
 } from 'lucide-react';
 
 interface HeaderNavbarProps {
@@ -318,6 +319,19 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
           >
             <Swords className="w-3.5 h-3.5 text-amber-400" />
             <span className="hidden sm:inline">Battle</span>
+          </button>
+
+          <button
+            onClick={() => setViewMode('chain')}
+            className={`flex items-center space-x-1.5 px-2.5 py-1 rounded text-xs transition ${
+              viewMode === 'chain'
+                ? 'bg-purple-600 text-white font-medium shadow'
+                : 'text-slate-400 hover:text-purple-300'
+            }`}
+            title="Chain of Thought: Visualize Agent Reasoning"
+          >
+            <BrainCircuit className="w-3.5 h-3.5 text-purple-400" />
+            <span className="hidden sm:inline">Chain</span>
           </button>
         </div>
       </div>

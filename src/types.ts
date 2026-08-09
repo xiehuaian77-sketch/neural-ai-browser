@@ -10,7 +10,7 @@ export interface ProviderInfo {
   models: ModelInfo[];
 }
 
-export type ViewMode = 'visual' | 'neural' | 'split' | 'battle';
+export type ViewMode = 'visual' | 'neural' | 'split' | 'battle' | 'chain';
 
 export type AgentStatus = 'idle' | 'analyzing' | 'navigating' | 'extracting' | 'executing' | 'synthesizing' | 'completed' | 'error';
 
