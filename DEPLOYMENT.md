@@ -1,5 +1,7 @@
 # Deployment Guide
 
+> ✅ **Vercel 已上线**：[https://ai-browser-glgme67e2-xiehuaian77-7548s-projects.vercel.app](https://ai-browser-glgme67e2-xiehuaian77-7548s-projects.vercel.app)
+
 This project is ready to deploy to **HuggingFace Spaces** or **Vercel**. Choose one platform and follow the steps below.
 
 ---
@@ -16,66 +18,104 @@ HuggingFace Spaces is the best first choice because:
 - A HuggingFace account: https://huggingface.co/join
 - A HuggingFace token with `write` permission: https://huggingface.co/settings/tokens
 
-### Step 1: Install / Update HF CLI
+### Step 1: Create a New Space (Web UI)
 
-```bash
-# Windows (PowerShell)
-winget install -e --id HuggingFace.HuggingFaceCli
+1. Open https://huggingface.co/new
+2. **Owner**: select your username (e.g. `xiehuaian77-sketch`)
+3. **Space name**: `neural-ai-browser`
+4. **License**: `mit`
+5. **Space SDK**: select **Docker**
+6. **Visibility**: Public
+7. Click **"Create Space"**
 
-# Or via pip
-pip install -U huggingface_hub
-```
+> **Screenshot tip**: Capture the "Create a new Space" form with all fields filled.
 
-### Step 2: Login to HuggingFace
+### Step 2: Configure Space Settings
 
-```bash
-hf auth login
-# Paste your HF token when prompted
-```
+1. Go to your new Space: https://huggingface.co/spaces/YOUR_USERNAME/neural-ai-browser
+2. Click **"Settings"** tab
+3. Scroll to **"Docker image"** section:
+   - Ensure **"Dockerfile"** is selected (not "Docker image URL")
+   - This is the default when you chose "Docker" SDK
+4. Scroll to **"Secrets and variables"** → **"Repository secrets"**:
+   - Click **"New secret"**
+   - Add the following secrets (optional, for real AI responses):
+     - `GEMINI_API_KEY` → your Gemini API key
+     - `OPENAI_API_KEY` → your OpenAI API key  
+     - `DEEPSEEK_API_KEY` → your DeepSeek API key
+     - `OPENAI_BASE_URL` → custom endpoint (if using OpenAI-compatible API)
+   - Click **"Add"** for each
 
-### Step 3: Create a New Space
+> **Screenshot tip**: 
+> - Capture the Settings page showing "Dockerfile" selected
+> - Capture the Secrets section with at least one secret added
 
-```bash
-# Create a new Space named "neural-ai-browser"
-hf repo create neural-ai-browser --type space --space_sdk docker
-```
+> **Note**: Without any API keys, the Space will still run in `DEMO_MODE` (mock responses).
 
-### Step 4: Configure Space Settings
+### Step 3: Push Code to HuggingFace Spaces
 
-1. Go to https://huggingface.co/spaces/xiehuaian77-sketch/neural-ai-browser/settings
-2. Under **"Docker image"**, ensure `Dockerfile` is selected
-3. Under **"Secrets and variables"**, add the following secrets:
-   - `GEMINI_API_KEY` (optional, for Gemini)
-   - `OPENAI_API_KEY` (optional, for OpenAI)
-   - `DEEPSEEK_API_KEY` (optional, for DeepSeek)
-   - `OPENAI_BASE_URL` (optional, if using a custom OpenAI-compatible endpoint)
-
-> Note: Without any API keys, the Space will still run in `DEMO_MODE` (mock responses).
-
-### Step 5: Push to HuggingFace Spaces
+**Option A: Using Git (Recommended)**
 
 ```bash
 cd D:/31986/Documents/ai-browser
 
-# Add HF Space as a remote
-git remote add hf https://huggingface.co/spaces/xiehuaian77-sketch/neural-ai-browser
+# Add HF Space as a remote (replace YOUR_USERNAME)
+git remote add hf https://huggingface.co/spaces/YOUR_USERNAME/neural-ai-browser
 
 # Push the main branch to HF Space
 git subtree push --prefix . hf main
 ```
 
-### Step 6: Verify Deployment
+**Option B: Using HF CLI**
 
-1. Open https://huggingface.co/spaces/xiehuaian77-sketch/neural-ai-browser
-2. Click **"App"** tab to see the running app
-3. The health check endpoint is `/api/health`
-4. Default port is `7860` (HF Spaces will proxy it)
+```bash
+# Install HF CLI
+pip install -U huggingface_hub
+
+# Login (paste your token)
+hf auth login
+
+# Clone your empty Space
+git clone https://huggingface.co/spaces/YOUR_USERNAME/neural-ai-browser
+cd neural-ai-browser
+
+# Copy all files from your local repo
+cp -r D:/31986/Documents/ai-browser/* .
+
+# Commit and push
+git add -A
+git commit -m "deploy: initial deployment"
+git push
+```
+
+### Step 4: Monitor Build & Verify Deployment
+
+1. Go to your Space URL
+2. Click **"Builds"** tab to see build logs
+3. Wait for build to complete (usually 2-5 minutes)
+4. Click **"App"** tab to see the running app
+5. Verify:
+   - Health check: visit `https://YOUR_USERNAME-neural-ai-browser.hf.space/api/health`
+   - Should return JSON with providers list
+   - Port `7860` is proxied by HF Spaces automatically
+
+> **Screenshot tip**: 
+> - Capture the "Builds" tab showing successful build
+> - Capture the "App" tab showing the running UI
+
+### Step 5: Update README with Live URL
+
+Once deployed, update your README.md with the actual Space URL:
+
+```markdown
+[![HuggingFace Spaces](https://img.shields.io/badge/HuggingFace-Spaces-blue)](https://huggingface.co/spaces/YOUR_USERNAME/neural-ai-browser)
+```
 
 ### Updating the Space
 
 ```bash
 # Make changes locally, then:
-git add -A && git commit -m "update"
+git add -A && git commit -m "update: description"
 git subtree push --prefix . hf main
 ```
 

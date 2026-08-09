@@ -26,7 +26,7 @@ $ neural-browser --model gemini-2.0-flash --task "分析 GitHub Trending 趋势"
 
 ![Demo](assets/demo.gif)
 
-[![Demo](https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-HuggingFace_Spaces-blue?logo=huggingface)](https://huggingface.co/spaces/xiehuaian77-sketch/neural-ai-browser)
+[![Demo](https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-Vercel-black?logo=vercel)](https://ai-browser-glgme67e2-xiehuaian77-7548s-projects.vercel.app)
 [![Deploy to Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://vercel.com/new/import/git/xiehuaian77-sketch/neural-ai-browser)
 [![Docker Image](https://img.shields.io/badge/Docker-Pull_Image-blue?logo=docker)](https://hub.docker.com/r/xiehuaian77-sketch/neural-ai-browser)
 [![GitHub stars](https://img.shields.io/github/stars/xiehuaian77-sketch/neural-ai-browser?style=social)](https://github.com/xiehuaian77-sketch/neural-ai-browser)
@@ -38,7 +38,7 @@ $ neural-browser --model gemini-2.0-flash --task "分析 GitHub Trending 趋势"
 
 > 🚀 **部署到 HuggingFace Spaces / Vercel 仅需 5 分钟** → 查看 [DEPLOYMENT.md](DEPLOYMENT.md)
 >
-> ⚠️ **HF Space 状态**：代码已就绪，Space 尚未创建。请按照 [DEPLOYMENT.md](DEPLOYMENT.md) 手动创建，或提供有效的 HF Token 自动创建。
+> ✅ **Vercel 已上线**：[https://ai-browser-glgme67e2-xiehuaian77-7548s-projects.vercel.app](https://ai-browser-glgme67e2-xiehuaian77-7548s-projects.vercel.app)
 
 ---
 
@@ -159,7 +159,7 @@ neural-ai-browser/
 - 📖 阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 了解流程
 - 🐛 提交 [Bug Report](.github/ISSUE_TEMPLATE/bug_report.md)
 - 💡 提议 [Feature Request](.github/ISSUE_TEMPLATE/feature_request.md)
-- 🔧 查看 [Good First Issues](https://github.com/yourname/neural-ai-browser/labels/good%20first%20issue) 开始你的第一个 PR
+- 🔧 查看 [Good First Issues](https://github.com/xiehuaian77-sketch/neural-ai-browser/labels/good%20first%20issue) 开始你的第一个 PR
 
 ### 贡献者墙
 
@@ -180,15 +180,15 @@ neural-ai-browser/
 | v0.5 | 语音控制浏览 + 多模态 | 📅 规划中 |
 | v1.0 | 插件市场 + 社区生态 | 📅 规划中 |
 
-查看完整路线图：[GitHub Projects](https://github.com/yourname/neural-ai-browser/projects)
+查看完整路线图：[GitHub Projects](https://github.com/xiehuaian77-sketch/neural-ai-browser/projects)
 
 ---
 
 ## 社区讨论
 
-- 💬 [GitHub Discussions](https://github.com/yourname/neural-ai-browser/discussions) — 提问、分享、Show & Tell
-- 🐦 [Twitter/X](https://twitter.com/yourname) — 关注获取最新动态
-- 📝 [掘金](https://juejin.cn/user/yourname) — 深度技术文章
+- 💬 [GitHub Discussions](https://github.com/xiehuaian77-sketch/neural-ai-browser/discussions) — 提问、分享、Show & Tell
+- 🐦 [Twitter/X](https://twitter.com/xiehuaian77) — 关注获取最新动态
+- 📝 [掘金](https://juejin.cn/user/xiehuaian77) — 深度技术文章
 
 ---
 
