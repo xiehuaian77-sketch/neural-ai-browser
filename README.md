@@ -26,10 +26,10 @@ $ neural-browser --model gemini-2.0-flash --task "分析 GitHub Trending 趋势"
 
 ![Demo](assets/demo.gif)
 
-[![Demo](https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-HuggingFace_Spaces-blue?logo=huggingface)](https://huggingface.co/spaces/yourname/neural-ai-browser)
-[![Deploy to Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://vercel.com/new/import/git/yourname/neural-ai-browser)
-[![Docker Image](https://img.shields.io/badge/Docker-Pull_Image-blue?logo=docker)](https://hub.docker.com/r/yourname/neural-ai-browser)
-[![GitHub stars](https://img.shields.io/github/stars/yourname/neural-ai-browser?style=social)](https://github.com/yourname/neural-ai-browser)
+[![Demo](https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-HuggingFace_Spaces-blue?logo=huggingface)](https://huggingface.co/spaces/xiehuaian77-sketch/neural-ai-browser)
+[![Deploy to Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://vercel.com/new/import/git/xiehuaian77-sketch/neural-ai-browser)
+[![Docker Image](https://img.shields.io/badge/Docker-Pull_Image-blue?logo=docker)](https://hub.docker.com/r/xiehuaian77-sketch/neural-ai-browser)
+[![GitHub stars](https://img.shields.io/github/stars/xiehuaian77-sketch/neural-ai-browser?style=social)](https://github.com/xiehuaian77-sketch/neural-ai-browser)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 **让 AI 真正上网的浏览器** · 自主感知 · 多模型协作 · 语义级 DOM 解析 · 开源可部署
@@ -85,7 +85,7 @@ AI 自动拆解任务、打开标签页、点击链接、提取信息，全程�
 ## 30 秒快速开始
 
 ### 在线体验（无需安装）
-[![Open in HuggingFace Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-huggingface-sm-dark.svg)](https://huggingface.co/spaces/yourname/neural-ai-browser)
+[![Open in HuggingFace Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-huggingface-sm-dark.svg)](https://huggingface.co/spaces/xiehuaian77-sketch/neural-ai-browser)
 
 > ⚠️ 在线 Demo 仅使用 Gemini 免费额度，请勿上传敏感数据。
 
@@ -93,7 +93,7 @@ AI 自动拆解任务、打开标签页、点击链接、提取信息，全程�
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/yourname/neural-ai-browser.git
+git clone https://github.com/xiehuaian77-sketch/neural-ai-browser.git
 cd neural-ai-browser
 
 # 2. 安装依赖
@@ -114,7 +114,8 @@ npm run dev
 docker run -p 3000:3000 \
   -e GEMINI_API_KEY=your_key \
   -e OPENAI_API_KEY=your_key \
-  yourname/neural-ai-browser:latest
+  -e DEMO_MODE=true \
+  xiehuaian77-sketch/neural-ai-browser:latest
 ```
 
 ---
@@ -160,8 +161,8 @@ neural-ai-browser/
 
 ### 贡献者墙
 
-<a href="https://github.com/yourname/neural-ai-browser/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=yourname/neural-ai-browser" />
+<a href="https://github.com/xiehuaian77-sketch/neural-ai-browser/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=xiehuaian77-sketch/neural-ai-browser" />
 </a>
 
 ---
@@ -191,16 +192,16 @@ neural-ai-browser/
 
 ## Star 历史
 
-[![Star History Chart](https://api.star-history.com/svg?repos=yourname/neural-ai-browser&type=Date)](https://star-history.com/#yourname/neural-ai-browser)
+[![Star History Chart](https://api.star-history.com/svg?repos=xiehuaian77-sketch/neural-ai-browser&type=Date)](https://star-history.com/#xiehuaian77-sketch/neural-ai-browser)
 
 ---
 
 ## License
 
-MIT © [Neural AI Browser Contributors](https://github.com/yourname/neural-ai-browser)
+MIT © [Neural AI Browser Contributors](https://github.com/xiehuaian77-sketch/neural-ai-browser)
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by <a href="https://github.com/yourname">yourname</a> and <a href="https://github.com/yourname/neural-ai-browser/graphs/contributors">contributors</a></sub>
+  <sub>Built with ❤️ by <a href="https://github.com/xiehuaian77-sketch">xiehuaian77-sketch</a> and <a href="https://github.com/xiehuaian77-sketch/neural-ai-browser/graphs/contributors">contributors</a></sub>
 </div>

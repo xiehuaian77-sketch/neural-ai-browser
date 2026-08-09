@@ -8,9 +8,28 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/neural-ai-browser.git"
+    "url": "https://github.com/xiehuaian77-sketch/neural-ai-browser.git"
   },
   "keywords": [
+    "ai",
+    "browser",
+    "agent",
+    "llm",
+    "automation",
+    "web-automation",
+    "deepseek",
+    "gemini",
+    "openai",
+    "qwen",
+    "glm",
+    "kimi",
+    "battle-mode",
+    "multi-model",
+    "streaming",
+    "huggingface",
+    "vercel"
+  ],
+  "homepage": "https://github.com/xiehuaian77-sketch/neural-ai-browser",
   "scripts": {
     "dev": "tsx server.ts",
     "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
